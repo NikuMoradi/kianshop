@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-320: 320px;
+  --breakpoint-360: 360px;
+  --breakpoint-640: 640px;
+  --breakpoint-768: 768px;
+  --breakpoint-500: 500px;
+  --breakpoint-700: 700px;
+  --breakpoint-1024: 1024px;
+  --breakpoint-1280: 1280px;
+
+  --color-primary: oklch(52.977% 0.17046 274.384);
+}
+
+:root {
+  --color-primary: oklch(52.977% 0.17046 274.384);
+}
