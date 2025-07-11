@@ -1,9 +1,9 @@
 <template>
-  <div></div>
+  <div class="min-h-screen bg-[#F8F7FB]">
+    <HeaderDesktop></HeaderDesktop>
+  </div>
 </template>
 
-<script>
-export default {};
-</script>
+<script></script>
 
 <style scoped></style>

@@ -9,13 +9,15 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   runtimeConfig: {
-    WP_API_BASE_URL: process.env.WP_API_BASE_URL,
+    public: {
+      WP_API_BASE_URL: process.env.WP_API_BASE_URL,
+    },
     WP_CONSUMER_KEY: process.env.WP_CONSUMER_KEY,
     WP_CONSUMER_SECRET: process.env.WP_CONSUMER_SECRET,
   },
-  modules: ["nuxt-viewport"],
+  modules: ["nuxt-viewport", "@pinia/nuxt"],
   imports: {
-    dirs: ["utils", "store"],
+    dirs: ["utils", "stores"],
   },
   components: [
     {
@@ -40,4 +42,5 @@ export default defineNuxtConfig({
       link: [],
     },
   },
+  plugins: ["~/plugins/disable-tls.js"],
 });
