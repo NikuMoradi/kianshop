@@ -45,8 +45,6 @@
 #008eb2
 #b2001a
 #c3c9fb57
-
-
 #858ae3*/
 
 /* =========================== */
@@ -65,6 +63,9 @@ body {
 }
 input:focus {
   outline: none;
+}
+a {
+  cursor: pointer;
 }
 /* ========================== */
 .scrollbar-custom {
@@ -196,7 +197,7 @@ input:focus {
   transform: rotate3d(1, 1, 1, 15deg);
 }
 .text-menu {
-  @apply text-[12px] font-semibold;
+  @apply text-[14px] font-semibold;
 }
 .border-complete-b {
   @apply border-b border-[#f0f0f1];

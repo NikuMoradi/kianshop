@@ -54,16 +54,20 @@ function buildCategoryTree(categories) {
 }
 const categories = computed(() => buildCategoryTree(flatCategories.value));
 const hoveredCategory = ref(null);
+const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
+  $fetch("/api/amazingInfo"),
+);
 </script>
 
 <template>
-  <header class="w-full">
+  <header class="fixed z-10 w-full">
     <!-- Top Banner -->
     <div
       class="flex h-[48px] w-full items-center justify-center bg-gradient-to-l from-[#b8c0ff] to-[#858ae3]"
     >
-      <span class="text-h4 tracking-tight text-white"
-        >تخفیف‌های شگفت لوازم التحریر کیان
+      <AmazingTimer></AmazingTimer>
+      <span class="text-h4 mr-2 tracking-tight text-white"
+        >{{ amazingInfo?.amazing_offers_text }}
       </span>
     </div>
     <!-- Main Header -->
@@ -219,8 +223,8 @@ const hoveredCategory = ref(null);
           @mouseleave="hoveredCategory = null"
         >
           <component
-            v-if="cat?.tabler_icon_name"
-            :is="cat.tabler_icon_name"
+            v-if="cat?.acf_data.tabler_icon_name"
+            :is="cat.acf_data.tabler_icon_name"
             class="h-5 w-5 pl-1"
           />
           <span>{{ cat.name }}</span>
@@ -251,7 +255,7 @@ const hoveredCategory = ref(null);
                       <li v-for="child in group.children" :key="child.id">
                         <NuxtLink
                           to="#"
-                          class="text-body-2-strong block rounded px-2 py-1 text-[#81858b] transition hover:bg-gray-100 hover:text-gray-700"
+                          class="text-body-1 block rounded px-2 py-1 text-[#81858b] transition hover:bg-gray-100 hover:text-gray-700"
                         >
                           {{ child.name }}
                         </NuxtLink>
