@@ -60,7 +60,7 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
 </script>
 
 <template>
-  <header class="fixed z-10 w-full">
+  <header class="fixed z-50 w-full">
     <!-- Top Banner -->
     <div
       class="flex h-[48px] w-full items-center justify-center bg-gradient-to-l from-[#b8c0ff] to-[#858ae3]"
@@ -79,7 +79,7 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
         <img
           src="public/images/logo-header-2.png"
           alt="ProRoyal Logo"
-          class="h-auto w-46 object-contain"
+          class="1024:block hidden h-auto w-46 object-contain"
         />
         <!-- search input -->
         <div
@@ -101,7 +101,7 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
       <div class="flex items-center justify-end">
         <template v-if="user">
           <!-- user icon -->
-          <div class="relative">
+          <div class="1024:block relative hidden">
             <div
               class="flex rounded-lg p-2"
               :class="{ 'bg-[#c3c9fb57]': isUserMenuOpen }"
@@ -213,7 +213,7 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
         </template>
       </div>
     </div>
-    <nav class="relative bg-white">
+    <nav class="1024:block relative hidden bg-white">
       <div class="inline-flex gap-8 px-8 py-2">
         <div
           v-for="cat in categories"

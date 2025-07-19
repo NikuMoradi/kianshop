@@ -1,13 +1,11 @@
 <template>
   <div class="container-2xl 1024:px-4 mx-auto">
     <div
-      class="1024:rounded-2xl 1024:py-5 1024:pl-0 flex flex-col items-center bg-[var(--color-primary)] pb-5"
+      class="1024:rounded-2xl 1024:pl-0 flex flex-col items-center bg-[var(--color-primary)] py-5"
     >
       <!-- ردیف اول -->
       <div class="w-full" v-if="$viewport.isLessThan('desktop')">
-        <div
-          class="1024:pt-0 flex w-full items-center justify-between px-5 py-3"
-        >
+        <div class="mb-3 flex w-full items-center justify-between px-5">
           <!-- سمت راست -->
           <div class="flex items-center justify-center gap-2">
             <div>
@@ -23,7 +21,7 @@
 
       <!-- ردیف دوم -->
       <div
-        class="no-scrollbar 1024:gap-2 flex w-full items-stretch gap-[2px] overflow-x-auto overflow-y-hidden px-5"
+        class="no-scrollbar flex w-full items-stretch gap-2 overflow-x-auto overflow-y-hidden px-5"
       >
         <div
           v-if="$viewport.isGreaterOrEquals('desktop')"
@@ -52,7 +50,9 @@
             'rounded-r-md': product.id === 1,
           }"
         >
-          <article class="1024:w-[142px] flex h-full w-[114px] flex-col">
+          <article
+            class="1024:w-[142px] flex h-full w-[114px] flex-col transition duration-500 hover:scale-103"
+          >
             <div class="relative h-40 rounded-2xl">
               <picture>
                 <source :srcset="product.images[0]?.src" />
