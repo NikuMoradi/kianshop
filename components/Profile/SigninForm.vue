@@ -99,6 +99,7 @@
 </template>
 
 <script setup>
+import { IconChevronLeft } from "@tabler/icons-vue";
 const emit = defineEmits(["switch-to-signup"]);
 const route = useRoute();
 

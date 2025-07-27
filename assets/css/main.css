@@ -12,6 +12,9 @@
   --color-primary: #858ae3;
   --color-light: #c3c9fb57;
 }
+:root {
+  --window-inner-height: 100vh;
+}
 
 /*
 #fff: 
@@ -208,6 +211,9 @@ a {
 .border-complete-200 {
   @apply border border-[#e0e0e2];
 }
+.border-complete-b-200 {
+  @apply border-b border-[#e0e0e2];
+}
 
 .text-h4 {
   @apply 360:text-[16px] 1024:text-[19px] text-[12.8px] leading-[2.1] font-bold;
@@ -237,7 +243,7 @@ a {
   @apply 360:text-[12px] text-[9.6px] leading-[180%] font-normal;
 }
 .text-body-2 {
-  @apply 360:text-[11px] text-[8.8px] leading-[2.17] font-normal;
+  @apply 360:text-[11px] 1024:text-[12px] text-[8.8px] leading-[2.17] font-normal;
 }
 .text-body-2-compact {
   @apply 360:text-[11px] text-[8.8px] leading-[125%] font-normal;

@@ -1,13 +1,25 @@
 <script setup>
+import {
+  IconUser,
+  IconCaretDownFilled,
+  IconChevronLeft,
+  IconShoppingCart,
+  IconChevronDown,
+  IconHeart,
+  IconLogout,
+  IconLogin,
+  IconSearch,
+  IconShoppingBag,
+} from "@tabler/icons-vue";
 // user
 const route = useRoute();
 const isUserMenuOpen = ref(false);
 const showLoginStatus = ref(false);
 const menuItems = ref([
-  { link: "/profile/orders", icon: "IconShoppingBag", text: "سفارش‌ها" },
-  { link: "/profile/lists", icon: "IconHeart", text: "لیست‌ها" },
+  { link: "/profile/orders", icon: IconShoppingBag, text: "سفارش‌ها" },
+  { link: "/profile/lists", icon: IconHeart, text: "لیست‌ها" },
   {
-    icon: "IconLogout",
+    icon: IconLogout,
     text: "خروج از حساب کاربری",
     action: handleLogout,
   },
@@ -72,30 +84,28 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
     </div>
     <!-- Main Header -->
     <div
-      class="border-complete-b flex w-full items-center justify-between bg-white px-4 py-4"
+      class="border-complete-b flex w-full items-center justify-between gap-3 bg-white px-4 py-4"
     >
       <!-- Right -->
       <div class="flex flex-1 items-center gap-4">
-        <img
-          src="public/images/logo-header-2.png"
-          alt="ProRoyal Logo"
-          class="1024:block hidden h-auto w-46 object-contain"
-        />
+        <nuxt-link to="/">
+          <img
+            src="public/images/logo-header-2.png"
+            alt="ProRoyal Logo"
+            class="1024:block hidden h-auto w-46 object-contain"
+        /></nuxt-link>
         <!-- search input -->
-        <div
-          class="flex w-full max-w-[800px] items-center rounded-lg border border-transparent bg-[#F0F0F1] transition focus-within:border-[#e5e5e5]"
+        <nuxt-link
+          to="/search"
+          class="flex max-w-[800px] flex-1 rounded-lg bg-[#f5f5f5] px-4 py-3"
         >
-          <div class="flex px-4">
-            <svg class="h-[20px] w-[20px]" fill="#424750">
-              <use href="/public/images/sprite.svg#searchSearch" />
-            </svg>
+          <div class="flex items-center gap-2">
+            <IconSearch color="#a1a3a8" width="24" height="24"></IconSearch>
+            <div class="text-[12px] leading-none text-[#737373] opacity-90">
+              <span>جستجوی محصول</span>
+            </div>
           </div>
-          <input
-            type="text"
-            class="text-body-1 h-11 w-full bg-transparent text-gray-700 placeholder:text-gray-400"
-            placeholder="جستجوی محصول ..."
-          />
-        </div>
+        </nuxt-link>
       </div>
 
       <div class="flex items-center justify-end">
@@ -173,62 +183,66 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
               </ul>
             </div>
           </div>
-
-          <span class="mx-3 h-6 w-[1px] bg-[#e5e5e5]"></span>
-          <!-- Shopping cart -->
-          <NuxtLink
-            to="/checkout/cart"
-            class="relative flex shrink-0 items-center justify-center p-2"
-          >
-            <div class="flex">
-              <IconShoppingCart
-                color="#424750"
-                :stroke="2"
-                class="scale-x-[-1]"
-              />
-              <div
-                class="absolute top-0 right-0 flex h-[20px] w-[20px] items-center justify-center rounded-[6px] border-[1px] border-white bg-[var(--color-primary)] text-[12px] text-white"
-              >
-                <!-- <div>{{ toPersianDigits(cart.totalItems) }}</div> -->
-                {{ toPersianDigits(2) }}
-              </div>
-            </div>
-          </NuxtLink>
         </template>
         <template v-else>
-          <nuxt-link :to="`/users/login?backUrl=${route.fullPath}`">
-            <div
-              class="flex shrink-0 items-center justify-center gap-x-2 rounded-lg border px-4 py-2"
-            >
-              <div class="flex shrink-0">
-                <svg class="h-[24px] w-[24px]" fill="#424750" stroke-width="0">
-                  <use href="public/images/sprite.svg#registerationSignIn" />
-                </svg>
+          <div v-if="$viewport.isGreaterOrEquals('laptop')">
+            <nuxt-link :to="`/users/login?backUrl=${route.fullPath}`">
+              <div
+                class="border-complete-200 flex shrink-0 items-center justify-center gap-x-2 rounded-lg border px-4 py-2"
+              >
+                <div class="relative top-[1px] flex shrink-0">
+                  <IconLogin></IconLogin>
+                </div>
+                <span class="text-button-2 shrink-0 flex-nowrap text-[#0c0c0c]">
+                  ورود | ثبت‌نام
+                </span>
               </div>
-              <span class="text-button-2 shrink-0 flex-nowrap text-[#0c0c0c]">
-                ورود | ثبت‌نام
-              </span>
-            </div>
-          </nuxt-link>
+            </nuxt-link>
+          </div>
         </template>
+        <span class="mx-3 h-6 w-[1px] bg-[#e5e5e5]"></span>
+        <!-- Shopping cart -->
+        <NuxtLink
+          to="/checkout/cart"
+          class="relative flex shrink-0 items-center justify-center p-2"
+        >
+          <div class="flex">
+            <IconShoppingCart
+              color="#424750"
+              :stroke="2"
+              class="scale-x-[-1]"
+            />
+            <div
+              class="absolute top-0 right-0 flex h-[20px] w-[20px] items-center justify-center rounded-[6px] border-[1px] border-white bg-[var(--color-primary)] text-[12px] text-white"
+            >
+              <!-- <div>{{ toPersianDigits(cart.totalItems) }}</div> -->
+              {{ toPersianDigits(2) }}
+            </div>
+          </div>
+        </NuxtLink>
       </div>
     </div>
-    <nav class="1024:block relative hidden bg-white">
-      <div class="inline-flex gap-8 px-8 py-2">
+    <nav class="1024:block hidden bg-white">
+      <div class="flex items-center gap-8 px-8 py-2">
         <div
           v-for="cat in categories"
           :key="cat.id"
-          class="text-button-1 relative flex cursor-pointer items-center py-1 text-[#3f4064] transition-colors duration-200 hover:text-[var(--color-primary)]"
+          class="text-button-1 relative cursor-pointer py-1 whitespace-nowrap text-[#3f4064] transition-colors duration-200 hover:text-[var(--color-primary)]"
           @mouseenter="hoveredCategory = cat"
           @mouseleave="hoveredCategory = null"
         >
-          <component
-            v-if="cat?.acf_data.tabler_icon_name"
-            :is="cat.acf_data.tabler_icon_name"
-            class="h-5 w-5 pl-1"
-          />
-          <span>{{ cat.name }}</span>
-
+          <nuxt-link
+            :to="`/categories/${cat.slug}`"
+            class="flex items-center gap-1"
+          >
+            <div class="1280:flex hidden items-center">
+              <Icon
+                :name="`tabler:${cat?.acf_data?.tabler_icon_name}`"
+                size="18"
+              />
+            </div>
+            <span>{{ cat.name }}</span>
+          </nuxt-link>
           <transition name="fade">
             <ul
               v-if="hoveredCategory?.id === cat.id"
@@ -254,7 +268,7 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
                     <ul class="mt-1 px-4 pb-2">
                       <li v-for="child in group.children" :key="child.id">
                         <NuxtLink
-                          to="#"
+                          :to="`/categories/${cat.slug}/${group.slug}/${child.slug}`"
                           class="text-body-1 block rounded px-2 py-1 text-[#81858b] transition hover:bg-gray-100 hover:text-gray-700"
                         >
                           {{ child.name }}
@@ -266,7 +280,7 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
 
                 <div v-else>
                   <NuxtLink
-                    to="#"
+                    :to="`/categories/${cat.slug}/${group.slug}`"
                     class="text-menu custom-ellipsis flex cursor-pointer items-center justify-between rounded-lg px-4 py-1 text-[#3f4064] hover:bg-[var(--color-light)] hover:text-gray-800"
                   >
                     {{ group.name }}

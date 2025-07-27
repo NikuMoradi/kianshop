@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-[#F8F7FB]">
     <Header></Header>
-    <div class="1024:pt-46 flex flex-col gap-y-8 pt-32 pb-14">
+    <div class="1024:pt-46 1024:pb-0 flex flex-col gap-y-8 pt-32 pb-14">
       <Slider></Slider>
       <AmazingProducts></AmazingProducts>
       <FeaturedCategories></FeaturedCategories>

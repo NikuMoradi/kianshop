@@ -1,5 +1,5 @@
 <template>
-  <footer class="container-4xl relative">
+  <footer class="container-4xl relative mt-12 border-t border-gray-200 pt-8">
     <img
       src="/images/footer/footer-waves.svg"
       alt="waves"
@@ -75,4 +75,11 @@
   </footer>
 </template>
 
-<script></script>
+<script setup>
+import {
+  IconMap,
+  IconPhoneCall,
+  IconMail,
+  IconBrandInstagram,
+} from "@tabler/icons-vue";
+</script>

@@ -83,3 +83,16 @@
     </nuxt-link>
   </div>
 </template>
+
+<script setup>
+import {
+  IconHome,
+  IconHomeFilled,
+  IconCategory,
+  IconCategoryFilled,
+  IconShoppingCart,
+  IconShoppingCartFilled,
+  IconUser,
+  IconUserFilled,
+} from "@tabler/icons-vue";
+</script>

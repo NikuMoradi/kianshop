@@ -10,11 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@iconify-json/tabler": "^1.2.20",
+    "@nuxt/icon": "^1.15.0",
     "@pinia/nuxt": "^0.11.1",
-    "@tabler/icons": "^3.34.0",
-    "@tabler/icons-vue": "^3.34.0",
+    "@tabler/icons": "^3.34.1",
+    "@tabler/icons-vue": "^3.34.1",
     "@tailwindcss/vite": "^4.1.11",
+    "@vueuse/core": "^13.5.0",
     "click-outside-vue3": "^4.0.1",
+    "lodash": "^4.17.21",
     "nuxt": "^3.17.5",
     "nuxt-viewport": "^2.3.1",
     "pinia": "^3.0.3",
