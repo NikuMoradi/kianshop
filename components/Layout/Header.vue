@@ -1,78 +1,5 @@
-<script setup>
-import {
-  IconUser,
-  IconCaretDownFilled,
-  IconChevronLeft,
-  IconShoppingCart,
-  IconChevronDown,
-  IconHeart,
-  IconLogout,
-  IconLogin,
-  IconSearch,
-  IconShoppingBag,
-} from "@tabler/icons-vue";
-// user
-const route = useRoute();
-const isUserMenuOpen = ref(false);
-const showLoginStatus = ref(false);
-const menuItems = ref([
-  { link: "/profile/orders", icon: IconShoppingBag, text: "سفارش‌ها" },
-  { link: "/profile/lists", icon: IconHeart, text: "لیست‌ها" },
-  {
-    icon: IconLogout,
-    text: "خروج از حساب کاربری",
-    action: handleLogout,
-  },
-]);
-const { data: user } = await useAsyncData("user", () =>
-  $fetch("/api/auth/user").catch(() => null),
-);
-const auth = useAuthStore();
-onMounted(() => {
-  if (user.value && !auth.user) {
-    auth.user = user.value;
-  }
-});
-function handleLogout() {
-  auth.logout();
-  showLoginStatus.value = true;
-  setTimeout(() => {
-    showLoginStatus.value = false;
-  }, 3000);
-}
-
-//categories
-const { data: flatCategories } = await useAsyncData("categories", () =>
-  $fetch("/api/categories"),
-);
-function buildCategoryTree(categories) {
-  const map = new Map();
-  const roots = [];
-
-  categories.forEach((cat) => {
-    map.set(cat.id, { ...cat, children: [] });
-  });
-
-  map.forEach((cat) => {
-    if (cat.parent === 0) {
-      roots.push(cat);
-    } else {
-      const parent = map.get(cat.parent);
-      if (parent) parent.children.push(cat);
-    }
-  });
-
-  return roots;
-}
-const categories = computed(() => buildCategoryTree(flatCategories.value));
-const hoveredCategory = ref(null);
-const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
-  $fetch("/api/amazingInfo"),
-);
-</script>
-
 <template>
-  <header class="fixed z-50 w-full">
+  <header class="fixed z-40 w-full">
     <!-- Top Banner -->
     <div
       class="flex h-[48px] w-full items-center justify-center bg-gradient-to-l from-[#b8c0ff] to-[#858ae3]"
@@ -109,7 +36,7 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
       </div>
 
       <div class="flex items-center justify-end">
-        <template v-if="user">
+        <template v-if="auth.isLoggedIn">
           <!-- user icon -->
           <div class="1024:block relative hidden">
             <div
@@ -299,6 +226,72 @@ const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
     @close="showLoginStatus = false"
   />
 </template>
+<script setup>
+import {
+  IconUser,
+  IconCaretDownFilled,
+  IconChevronLeft,
+  IconShoppingCart,
+  IconChevronDown,
+  IconHeart,
+  IconLogout,
+  IconLogin,
+  IconSearch,
+  IconShoppingBag,
+} from "@tabler/icons-vue";
+// user
+const route = useRoute();
+const isUserMenuOpen = ref(false);
+const showLoginStatus = ref(false);
+const menuItems = ref([
+  { link: "/profile/orders", icon: IconShoppingBag, text: "سفارش‌ها" },
+  { link: "/profile/lists", icon: IconHeart, text: "لیست‌ها" },
+  {
+    icon: IconLogout,
+    text: "خروج از حساب کاربری",
+    action: handleLogout,
+  },
+]);
+const auth = useAuthStore();
+const user = auth.user;
+
+function handleLogout() {
+  auth.logout();
+  showLoginStatus.value = true;
+  setTimeout(() => {
+    showLoginStatus.value = false;
+  }, 3000);
+}
+
+//categories
+const { data: flatCategories } = await useAsyncData("categories", () =>
+  $fetch("/api/categories"),
+);
+function buildCategoryTree(categories) {
+  const map = new Map();
+  const roots = [];
+
+  categories.forEach((cat) => {
+    map.set(cat.id, { ...cat, children: [] });
+  });
+
+  map.forEach((cat) => {
+    if (cat.parent === 0) {
+      roots.push(cat);
+    } else {
+      const parent = map.get(cat.parent);
+      if (parent) parent.children.push(cat);
+    }
+  });
+
+  return roots;
+}
+const categories = computed(() => buildCategoryTree(flatCategories.value));
+const hoveredCategory = ref(null);
+const { data: amazingInfo } = await useAsyncData("amazingInfo", () =>
+  $fetch("/api/amazingInfo"),
+);
+</script>
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {

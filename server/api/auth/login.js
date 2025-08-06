@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     setCookie(event, "jwt_token", wpRes.token, {
       httpOnly: true,
       path: "/",
-      maxAge: 60 * 60 * 24 * 2, // 1 day
+      maxAge: 60 * 60 * 24 * 2,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
     });

@@ -1,16 +1,17 @@
-// server/api/auth/user.js
+// server/api/profile.js
 import { getCookie } from "h3";
 
 export default defineEventHandler(async (event) => {
   const token = getCookie(event, "jwt_token");
-  const wpApiUrl = useRuntimeConfig().public.WP_API_BASE_URL;
+  const config = useRuntimeConfig();
+  const wpApiUrl = config.public.WP_API_BASE_URL;
 
   if (!token) {
     throw createError({ statusCode: 401, message: "Unauthorized" });
   }
 
   try {
-    // console.log("🔍 TOKEN:", token);
+    // Fetch user profile data from WordPress
     const user = await $fetch(
       `${wpApiUrl}/wp-json/wp/v2/users/me?context=edit`,
       {
@@ -19,20 +20,19 @@ export default defineEventHandler(async (event) => {
         },
       },
     );
-    console.log("📦 WordPress user response:", user);
 
+    // Format the response to match the expected structure in the frontend
     return {
       id: user.id,
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      mobile_number: user.all_meta?.billing_phone || "",
-      postcode: user.all_meta?.billing_postcode || "",
-      city: user.all_meta?.billing_city || "",
-      address: user.all_meta?.billing_address_1 || "",
+      mobile_number: user.meta?.mobile_number || "",
+      national_code: user.meta?.national_code || "",
+      birth_date: user.meta?.birth_date || "",
     };
   } catch (err) {
-    console.error("Auth error:", err);
-    throw createError({ statusCode: 401, message: "Invalid token" });
+    console.error("Profile fetch error:", err);
+    throw createError({ statusCode: 401, message: "Failed to fetch profile data" });
   }
 });

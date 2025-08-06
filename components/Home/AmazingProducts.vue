@@ -45,6 +45,7 @@
         <nuxt-link
           v-for="product in products"
           :key="product.id"
+          :to="`/products/${product.id}/${slugify(product.name)}`"
           class="block rounded-2xl bg-white p-2"
           :class="{
             'rounded-r-md': product.id === 1,
@@ -65,14 +66,7 @@
               <span
                 v-if="$viewport.isLessThan('desktop')"
                 class="absolute bottom-0 left-0 flex h-5 w-8 items-center justify-center rounded-full bg-[var(--color-primary)] px-1 py-1 text-xs text-white"
-                >{{
-                  toPersianDigits(
-                    calcDiscount(
-                      product.display_price,
-                      product.display_sale_price,
-                    )?.discount,
-                  )
-                }}٪</span
+                >{{ toPersianDigits(product.discount_percentage) }}٪</span
               >
             </div>
             <div class="flex flex-col gap-2">

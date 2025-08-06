@@ -13,9 +13,7 @@ useFetch("/api/pages"); -->
 </template>
 
 <script setup>
-// app.vue
-// const authUser = useState("auth-user", () => $fetch("/api/auth/user"));
-// const auth = useAuthStore();
-// auth.user = authUser.value;
+//Since it's defined as async, you need to await it when calling it. So the layout should be:
+await useAuthUser();
 </script>
 <style></style>

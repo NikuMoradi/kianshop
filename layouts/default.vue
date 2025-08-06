@@ -1,4 +1,4 @@
 <template>
   <NuxtPage />
 </template>
-<style></style>
+<script setup></script>

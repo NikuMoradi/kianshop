@@ -1,9 +1,9 @@
 <template>
   <div @click="toggleFavorite(productId)" class="cursor-pointer">
-    <svg v-if="!isFavorite" class="w-6 h-6" fill="#">
+    <svg v-if="!isFavorite" class="h-6 w-6" fill="#">
       <use href="/images/sprite.svg#favoriteOff" />
     </svg>
-    <svg v-else class="w-6 h-6" fill="red">
+    <svg v-else class="h-6 w-6" fill="red">
       <use href="/images/sprite.svg#favoriteOn" />
     </svg>
   </div>

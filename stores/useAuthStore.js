@@ -1,16 +1,17 @@
-import { defineStore } from "pinia";
-export const useAuthStore = defineStore("auth", {
-  state: () => ({
-    user: null,
-  }),
-  getters: {
-    isLoggedIn: (state) => !!state.user,
-  },
-  actions: {
-    async logout() {
-      await $fetch("/api/auth/logout", { method: "POST" });
-      this.user = null;
-      navigateTo("/users/login");
-    },
-  },
+// stores/auth.js
+export const useAuthStore = defineStore("auth", () => {
+  const user = ref(null);
+  const isLoggedIn = computed(() => !!user.value);
+
+  const setUser = (u) => {
+    user.value = u;
+  };
+
+  const logout = async () => {
+    await $fetch("/api/auth/logout");
+
+    user.value = null;
+  };
+
+  return { user, isLoggedIn, setUser, logout };
 });

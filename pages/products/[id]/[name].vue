@@ -1,9 +1,15 @@
 <template>
-  <div></div>
+  <component
+    :is="$viewport.isLessThan('laptop') ? MobileProduct : DesktopProduct"
+  />
 </template>
 
-<script>
-export default {};
+<script setup>
+// Lazy Load
+const DesktopProduct = defineAsyncComponent(
+  () => import("@/components/product/DesktopProduct.vue"),
+);
+const MobileProduct = defineAsyncComponent(
+  () => import("@/components/product/MobileProduct.vue"),
+);
 </script>
-
-<style lang="scss" scoped></style>

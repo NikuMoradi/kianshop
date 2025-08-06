@@ -15,7 +15,13 @@ export default defineNuxtConfig({
     WP_CONSUMER_KEY: process.env.WP_CONSUMER_KEY,
     WP_CONSUMER_SECRET: process.env.WP_CONSUMER_SECRET,
   },
-  modules: ["nuxt-viewport", "@pinia/nuxt", "@nuxt/icon"],
+  modules: [
+    "nuxt-viewport",
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    ,
+    "@nuxt/icon",
+  ],
   icon: {
     size: "24px",
     class: "inline-block",

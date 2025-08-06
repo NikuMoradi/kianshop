@@ -54,18 +54,17 @@
             v-show="activeCategory === cat.id"
             class="flex flex-col items-stretch"
           >
-            <NuxtLink :to="`/categories/${cat.slug}`"
-              ><div
-                class="360:text-[11px] flex items-center gap-2 py-3 text-[8.8px] leading-[2.15] font-bold text-[#008eb2]"
-              >
-                همه محصولات {{ cat.name }}
-                <IconChevronLeft
-                  width="12px"
-                  height="12px"
-                  color="#008eb2"
-                  :stroke="3"
-                /></div
-            ></NuxtLink>
+            <NuxtLink
+              :to="`/categories/${cat.slug}`"
+              class="360:text-[11px] flex w-fit items-center gap-2 py-3 text-[8.8px] leading-[2.15] font-bold text-[#008eb2]"
+            >
+              همه محصولات {{ cat.name }}
+              <IconChevronLeft
+                width="12px"
+                height="12px"
+                color="#008eb2"
+                :stroke="3"
+            /></NuxtLink>
             <div
               v-for="group in cat.children"
               :key="group.id"

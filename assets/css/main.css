@@ -67,9 +67,11 @@ body {
 input:focus {
   outline: none;
 }
-a {
+a,
+button {
   cursor: pointer;
 }
+
 /* ========================== */
 .scrollbar-custom {
   scrollbar-width: medium;

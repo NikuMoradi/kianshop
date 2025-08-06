@@ -47,7 +47,7 @@
       class="flex flex-1 flex-col items-center justify-start transition-transform duration-300 ease-in-out"
     >
       <IconShoppingCartFilled
-        v-if="$route.path === '/cart'"
+        v-if="$route.path === '/checkout/cart'"
         class="scale-x-[-1] text-[var(--color-primary)]"
       />
       <IconShoppingCart v-else class="scale-x-[-1] text-[#a1a3a8]" />
