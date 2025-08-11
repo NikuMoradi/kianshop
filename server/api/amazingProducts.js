@@ -1,7 +1,5 @@
 import { processProducts } from "~/utils/processProducts";
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
 
