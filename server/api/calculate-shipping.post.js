@@ -1,61 +1,53 @@
+//server/api/calculate-shipping.post.js
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const {
-      order_type,
-      origin_province,
-      destination_province,
-      origin_city,
-      destination_city,
-      weight,
-      price,
-    } = body;
+    const { to_city_code, weight, price, serviceType, courierCode } = body;
 
-    // Validate inputs
-    if (
-      !order_type ||
-      !origin_province ||
-      !destination_province ||
-      !origin_city ||
-      !destination_city ||
-      !weight ||
-      !price
-    ) {
-      throw new Error(
-        "لطفاً اطلاعات استان مبدا، استان مقصد، شهر مبدا، شهر مقصد، وزن و قیمت را وارد کنید.",
-      );
+    if (!to_city_code || !weight || !price || !courierCode || !serviceType) {
+      throw new Error("لطفاً شهر مقصد و وزن را وارد کنید.");
     }
 
-    const apiUrl = "https://public.api.tapin.ir/api/v1/public/check-price/";
-
+    const apiKey = useRuntimeConfig().public.postexApiKey;
+    const apiUrl = "https://api.postex.ir/api/v1/shipping/quotes";
     const payload = {
-      rate_type: "tapin",
-      price: parseInt(price),
-      weight: parseInt(weight),
-      order_type: order_type, //
-      pay_type: 1, // پرداخت آنلاین (بر اساس جدول نوع پرداخت)
-      to_province: parseInt(destination_province),
-      from_province: parseInt(origin_province),
-      to_city: parseInt(destination_city),
-      from_city: parseInt(origin_city),
-      box_id: 10, // شناسه بسته پستی (می‌تونید بر اساس نیاز تغییر بدید)
+      from_city_code: 1,
+      pickup_needed: false,
+      courier: {
+        courierCode: courierCode,
+        serviceType: serviceType,
+      },
+      parcels: [
+        {
+          custom_parcel_id: "",
+          to_city_code: 1,
+          payment_type: "SENDER",
+          parcel_properties: {
+            total_weight: weight,
+            total_value: price,
+            box_type_id: 1,
+          },
+        },
+      ],
+      value_added_service: {},
     };
 
     const response = await $fetch(apiUrl, {
       method: "POST",
       headers: {
+        "x-api-key": apiKey,
         "Content-Type": "application/json",
       },
       body: payload,
     });
-
-    if (response.returns.status === 200) {
+    console.log();
+    if (response.isSuccess) {
       return {
         status: "success",
-        data: response.entries,
+        data: response.data,
       };
     } else {
-      throw new Error(response.returns.message || "خطا در محاسبه هزینه");
+      throw new Error(response.message || "خطا در محاسبه هزینه");
     }
   } catch (error) {
     return {

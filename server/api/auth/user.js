@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
         },
       },
     );
-    console.log("📦 WordPress user response:", user);
+    // console.log("📦 WordPress user response:", user);
 
     return {
       id: user.id,

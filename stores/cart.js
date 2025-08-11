@@ -112,13 +112,14 @@ export const useCartStore = defineStore("cart", {
     },
     getCartTotalWithDiscount: (state) => {
       return state.items.reduce((total, item) => {
-        const itemPrice = item.sale_price * item.quantity;
+        const itemPrice =
+          (item.sale_price || item.regular_price) * item.quantity;
         return total + itemPrice;
       }, 0);
     },
     getTotalWeight: (state) => {
       return state.items.reduce((total, item) => {
-        const itemWeight = item.weight * item.quantity;
+        const itemWeight = (item.weight || 0) * item.quantity;
         return total + itemWeight;
       }, 0);
     },

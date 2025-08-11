@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       WP_API_BASE_URL: process.env.WP_API_BASE_URL,
+      postexApiKey: process.env.POSTEX_API_KEY,
     },
     WP_CONSUMER_KEY: process.env.WP_CONSUMER_KEY,
     WP_CONSUMER_SECRET: process.env.WP_CONSUMER_SECRET,
